@@ -1,0 +1,14 @@
+.skip-link {
+  background-color: var(--white);
+  display: block;
+  font-size: 1rem;
+  left: -9999em;
+  position: fixed;
+  z-index: 1000;
+
+  &:focus,
+  &:active {
+    top: 1rem;
+    left: 1rem;
+  }
+}

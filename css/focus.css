@@ -1,0 +1,8 @@
+*:focus {
+  outline: 1px dotted var(--black);
+}
+
+/*
+- Gebruik altijd een focus state, niet alleen voor keyboardgebruikers.
+- Alleen interactieve elementen mogen een focusstate hebben
+*/

@@ -1,0 +1,24 @@
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: var(--gray-lighter);
+  font-style: italic;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: var(--gray-lighter);
+  font-style: italic;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: var(--gray-lighter);
+  font-style: italic;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: var(--gray-lighter);
+  font-style: italic;
+}
+
+/*
+- goed gebruik om placeholder italic te maken
+*/
