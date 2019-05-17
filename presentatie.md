@@ -7,6 +7,19 @@
 
 ## Wat betekent A11y
 
+![](images/a11y.png)
+
+## Niews
+
+### Microsoft lanceert a11y controller
+
+![](images/microsoft-xbox-adaptive-controller.jpg)
+[![](https://img.youtube.com/vi/9fcK19CAjWM/0.jpg)](https://www.youtube.com/watch?v=9fcK19CAjWM)
+
+### Beyonce is aangeklaagd
+
+![](images/beyonce.png)
+
 ## Misvattingen
 
 - Screenreaders ondersteunen geen javascript
@@ -25,24 +38,37 @@
 ## Nut en noodzaak
 
 - Site laagdrempeling maken
-- Doelgroep verbreden
+- Gebruikersgroep verbreden
 - Fix for one, solve for many
 - Semantisch beter opgezet
 - Site is futureproof (controllers, voice assistants)
 
 ## POUR
 
-- Perceivable (ondertiteling, contrast, screenreader)
-- Operable (toetsenboard, stem)
-- Understandable (schrijf b1 niveau: korte zinnen, geen bijzinnen)
-- Robust (oude apparaten)
+- Perceivable
+  ondertiteling, contrast, screenreader
+- Operable
+  toetsenboard, stem
+- Understandable
+  schrijf b1 niveau: korte zinnen, geen bijzinnen
+- Robust
+  oude apparaten
 
 ## Doelgroep
 
-## Toepassingen
+### Algemeen
+
+![](images/statistieken.png)
+
+### Slechtzienden
+
+![](images/slechtzienden.jpg)
+
+## Use cases
 
 ### Toetsenbord
 
+- Mensen met fysieke beperkingen
 - Controller op de browser
 - Lege batterijen op de muis
 - Poweruser
@@ -58,8 +84,6 @@
 - Doven/slechhorenden
 - Drukke trein
 - Op kantoor, tussen het deployen door
-
-## Use cases
 
 ## Wat zijn screenreaders
 
@@ -233,9 +257,24 @@
 
 > SC 1.1.1, 1.3.1, 3.3.2 en 4.1.2 (A) en 2.4.6 (AA)
 
+### Label
+
 - Het `<label>`element is gebruikt om tekstlabels met formulier-invoervelden te associëren.
+
+  - velden moeten altijd een label hebben (geassocieerd met for/id)
+  - bij onzichtbare labels, gebruik liever een sr-only class dan aria-label
+  - gebruik nooit placeholders als label, die worden niet gelezen door screenreader
+
+```html
+<label for="lastname">Achternaam</label>
+<input type="text" name="lastname" id="lastname" />
+```
+
+---
+
 - Het title attribuut is gebruikt als geen ruimte was voor een visueel tekstlabel.
-- De `<fieldset>` en `<legend>` elementen zijn gebruikt voor het groeperen van bedieningselementen. Gebruik `<fieldset>` en `<legend>` altijd voor een groep radiobuttons of checkboxen.
+- De `<fieldset>` en `<legend>` elementen zijn gebruikt voor het groeperen van bedieningselementen.
+- Gebruik `<fieldset>` en `<legend>` altijd voor een groep radiobuttons of checkboxen.
 - Bied goed beschrijvende labels en plaats belangrijke instructie binnen het geassocieerde label.
 
 ## Fout identificatie, foutsuggestie en preventie
@@ -318,3 +357,28 @@
 ```
 
 - goed gebruik om placeholder italic te maken
+
+# Indept components
+
+- tabs
+- kaarten
+- carousel
+- modal
+- menu
+
+# Todo
+
+- verschil A/AA/AAA
+
+# Opdracht
+
+- Contrast in text
+- lees meer links
+- onclick op item
+- geen tekst in social links
+-
+
+# Afsluiter
+
+- benader mij voor vragen
+- goed gevoel bij?

@@ -1,0 +1,144 @@
+:root {
+  --grey-light: #ccc;
+  --grey: #777;
+  --grey-dark: #777;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  outline: none;
+}
+
+html {
+  font-size: 12px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--grey);
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+.wrapper {
+  max-width: 50em;
+  margin: 0 auto;
+  padding: 0 1em;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.header {
+  padding: 1em 0;
+  display: flex;
+  font-size: 1.5em;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--grey-light);
+}
+
+.header img {
+  width: 6em;
+}
+
+.title {
+  font-size: 2em;
+  text-align: center;
+  padding: 1em 0;
+}
+
+.item {
+  padding: 0.5em;
+  display: flex;
+  background: var(--grey-light);
+  border-radius: 0.25em;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.item:hover img {
+  transform: scale(1.1);
+}
+
+.text {
+  margin-bottom: 0.5em;
+}
+
+.image-wrapper {
+  height: 10em;
+  overflow: hidden;
+  margin-bottom: 0.5em;
+}
+
+.news img {
+  transition: transform 0.2s;
+  height: 10em;
+  object-fit: cover;
+  width: 100%;
+}
+
+.news {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+}
+
+.news span {
+  margin-top: auto;
+}
+
+.news-title {
+  font-size: 1.5em;
+}
+
+.news a {
+  display: block;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em 0;
+}
+
+.footer a {
+  display: block;
+  height: 24px;
+  width: 24px;
+  opacity: 0.5;
+  margin-right: 0.5em;
+}
+
+input {
+  margin-right: auto;
+  width: 20em;
+  font-family: inherit;
+  padding: 0.25em;
+  font-family: 'Roboto', sans-serif;
+  color: var(--grey);
+  border: 1px solid var(--grey-light);
+  border-radius: 0.25em;
+}
+
+.facebook {
+  background: url('../images/facebook-official.png');
+}
+
+.twitter {
+  background: url('../images/twitter.png');
+}
+
+.twitch {
+  background: url('../images/twitch.png');
+}
