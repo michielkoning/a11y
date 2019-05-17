@@ -59,9 +59,9 @@ img {
 }
 
 .item {
-  padding: 0.5em;
   display: flex;
   background: var(--grey-light);
+  padding: 0.5em;
   border-radius: 0.25em;
   flex-direction: column;
   cursor: pointer;
@@ -76,6 +76,8 @@ img {
 }
 
 .image-wrapper {
+  border-radius: 0.25em 0.25em 0 0;
+  margin: -0.5em -0.5em 0;
   height: 10em;
   overflow: hidden;
   margin-bottom: 0.5em;

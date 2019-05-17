@@ -99,6 +99,8 @@
 - Drempelvrij
 - A/AA/AAA
 - Alles moet voldoen aan de standaarden, inclusief subdomeinen, scripts en PDFs
+- PDF moeten indexeerbaar zijn
+- Je site moet ook werken in landscape mode
 
 ## Verantwoordelijkheid
 
@@ -118,7 +120,17 @@
 > SC 3.1.1 (A) en 3.1.2 (AA)
 
 - De basistaal van de webpagina is aangegeven (lang en/of xml:lang binnen <html>).
+
+```html
+<!DOCTYPE html>
+<html lang="en"></html>
+```
+
 - De taalwisselingen op de webpagina zijn aangegeven.
+
+```html
+Volg ons op <span lang="nl">Facebook</span>
+```
 
 ## Paginatitel
 
@@ -126,6 +138,27 @@
 
 - De webpagina heeft een titel die het doel of het onderwerp beschrijft.
 - De paginatitel is uniek binnen de website.
+
+## Koppen SC 1.3.1 (A) en 2.4.6 (AA)
+
+- Koppen worden correct opgemaakt (`<h1>`, `<h2>` etc., `<caption>` of `<legend>`).
+- Koppen geven een goede beschrijving van de content.
+
+## Lijsten SC 1.3.1 (A)
+
+- Het `<ul>` element is gebruikt voor ongeordende lijsten.
+- Het `<ol>` element is gebruikt voor geordende of genummerde lijsten.
+- Het `<dl>` element is gebruikt voor definitielijsten.
+
+## Tabellen SC 1.3.1, 1.3.2 (A) en 2.4.6 (AA)
+
+- Er zijn geen tabellen gebruikt voor het toepassen van layout.
+- Rij en kolomkoppen zijn correct opgemaakt (met th elementen).
+- Als een summary wordt geboden, dient deze inhoudelijk anders te zijn dan de caption.
+
+## Citaten SC 1.3.1 (A)
+
+- Gebruik `<blockquote>` enkel voor citaten in blokvorm en niet voor de opmaak van tekst.
 
 ## Nadruk
 
@@ -140,14 +173,43 @@
 
 - Iframes hebben een title attribuut die de inhoud van het iframe beschrijven.
 
+```html
+<iframe title="Twitter feed" src="..."></iframe>
+```
+
 ## Tekstalternatief voor afbeeldingen
 
 > SC 1.1.1 (A)
 
 - Functionele afbeeldingen hebben een duidelijk beschrijvend tekstueel alternatief (alt tekst).
+
+```html
+<img src="images/employeers" alt="Twee Valtech medewerkers aan het werk" />
+```
+
+```html
+<svg>
+  <title>Volg Valtech op Facebook</title>
+  ...
+</svg>
+```
+
 - Decoratieve afbeeldingen hebben een leeg alt attribuut of zijn via CSS geplaatst.
 - Als alternatief niet in alt attribuut past: langere beschrijving rondom afbeelding of ernaar verwijzen.
+
+```html
+<figure>
+  <img src="pic_trulli.jpg" alt="Trulli" style="width:100%" />
+  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
+</figure>
+```
+
 - Afbeeldingen die als link gebruikt worden, dienen altijd tekstueel alternatief te hebben.
+
+```html
+<a><img src="img/logo.png" alt="Company name"/></a>
+```
+
 - CSS-afbeeldingen: alternatief mag buiten beeld geplaatst (nooit display:none / visibility:hidden).
 
 ## Afbeeldingen van tekst
@@ -155,6 +217,7 @@
 > SC 1.4.5 (AA)
 
 - Zet geen tekst op afbeeldingen, maar plaats tekst met HTML en style deze met CSS. _Uitzondering: essentiële afbeeldingen met tekst zoals logo's._
+  ![](images/coca-cola.jpg)
 
 ## Captcha
 
@@ -172,12 +235,21 @@
 - Kleur wordt niet als enige middel gebruikt om tot een reactie op te roepen.
 - Kleur wordt niet als enige middel gebruikt om een visueel element te onderscheiden.
 
+```css
+a {
+  color: blue;
+  text-decoration: underline;
+}
+```
+
 ## Contrast
 
 > SC 1.4.3 (AA)
 
 - Het contrast van normale tekst en afbeeldingen van tekst is 4,5:1.
 - Het contrast van grote tekst (18pt of 14pt dikgedrukt) en afbeeldingen van grote tekst is 3:1.
+
+[Contrastchecker](https://webaim.org/resources/contrastchecker/)
 
 ## Herschalen van tekst
 
@@ -245,13 +317,55 @@
 - Bied een logische tabvolgorde door de webpagina.
 - Tabfocus is zichtbaar (fout als er gebruik is gemaakt van `outline:none / outline:0` in CSS).
 
+```css
+*:focus {
+  outline: 1px dotted var(--black);
+}
+```
+
 ## Navigatie en links
 
 > SC 2.4.1, 2.4.4, 3.2.1, 3.2.2 (A), 2.4.5, 3.2.3 en 3.2.4 (AA)
 
 - Bied zo duidelijk mogelijke linkteksten.
+
+```html
+<a href="#">Lees meer <span class="sr-only">over Valtech</a>
+```
+
 - Onderdelen van de website navigatie worden consistent op de zelfde plek geplaatst. Onderdelen met een bepaalde functie hebben consistent dezelfde naam.
 - Gebruik skiplinks en zorg dat deze zichtbaar zijn bij tabfocus.
+
+```html
+<body>
+  <a href="#content" class="skipLink">Naar hoofdinhoud</a>
+  <a href="#menu" class="skipLink">Naar hoofdnavigatiemenu</a>
+  <nav>
+    <h2 class="sr-only" id="menu" tabindex="-1">Menu</h2>
+  </nav>
+
+  <main>
+    <h1 id="content" tabindex="-1"></h1>
+  </main>
+</body>
+```
+
+```css
+.skip-link {
+  background-color: var(--white);
+  display: block;
+  font-size: 1rem;
+  left: -9999em;
+  position: fixed;
+  z-index: 1000;
+
+  &:focus,
+  &:active {
+    top: 1rem;
+    left: 1rem;
+  }
+}
+```
 
 ## Relaties binnen formulieren
 
@@ -274,6 +388,13 @@
 
 - Het title attribuut is gebruikt als geen ruimte was voor een visueel tekstlabel.
 - De `<fieldset>` en `<legend>` elementen zijn gebruikt voor het groeperen van bedieningselementen.
+
+```html
+<fieldset>
+  <legend class="sr-only">NAW-gegevens</legend>
+</fieldset>
+```
+
 - Gebruik `<fieldset>` en `<legend>` altijd voor een groep radiobuttons of checkboxen.
 - Bied goed beschrijvende labels en plaats belangrijke instructie binnen het geassocieerde label.
 
@@ -282,13 +403,33 @@
 > SC 3.3.1 (A), SC 3.3.3 en 3.3.4 (AA)
 
 - Als formulier niet verstuurt: tekstueel duidelijk de fout beschrijven en waar deze zich bevindt. Geef ten alle tijden een suggestie ter verbetering van de fout.
+
+```html
+<label for="email">Achternaam</label>
+<input type="email" name="email" id="email" />
+<span role="status" aria-live="polite">
+  Het ingevoerde emailadres is niet valide. Een emailadres moet een @ bevatten.
+</span>
+```
+
 - Foutpreventie bij formulieren met belangrijke gegevens: mogelijkheid tot annulering of controle.
 
 # Code
 
-## Css
+## HTML
 
-### Screenreader only
+## Aria-labeledby
+
+- Screenreaders kunnen door sections/nav/header navigeren
+- Identificeer een section/nav/header (indien meerdere) met een header
+
+```html
+<section aria-labelledby="models">
+  <h2 id="models">Modellen</h2>
+</section>
+```
+
+## Screenreader only
 
 ```css
 .sr-only {
@@ -303,18 +444,7 @@
 }
 ```
 
-### Focus
-
-```css
-*:focus {
-  outline: 1px dotted var(--black);
-}
-```
-
-- Gebruik altijd een focus state, niet alleen voor keyboardgebruikers.
-- Alleen interactieve elementen mogen een focusstate hebben
-
-### Media queries
+## Media queries
 
 ```css
 @media screen and (prefers-reduced-motion: reduce) {
@@ -331,7 +461,7 @@
 }
 ```
 
-### Placeholders
+## Placeholders
 
 ```css
 ::-webkit-input-placeholder {
@@ -360,11 +490,41 @@
 
 # Indept components
 
+## Kaarten
+
+- Zorg dat de titel in de markup bovenaan staat
+- Je kunt het hele item klikbaar maken, maar houd de link intact
+- Gebruik een beschrijvende linktekst
+
+```html
+<div class="item">
+  <h2 class="news-title">Barnevelder</h2>
+  <img src="images/barnevelder.jpg" alt="Een barneveldse kip aan het leggen" />
+  <div class="text">
+    De barnevelder is een middelzwaar kippenras dat zijn oorsprong heeft in het
+    Nederlandse Barneveld.
+  </div>
+  <a href="#">Lees meer over de Barnevelder</a>
+</div>
+```
+
+```css
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  order: -1;
+}
+```
+
 - tabs
 - kaarten
 - carousel
 - modal
 - menu
+- autocomplete
 
 # Todo
 
@@ -372,11 +532,34 @@
 
 # Opdracht
 
+## Algemeen
+
+- geen semantiek (header/main/footer)
+- geen aria-labeledby
+- te klein lettertype
+- geen hover op items
+- geen focusstate
+- algemene page title
+- title tags kloppen niet
+- verkeerde taal
+
+## Header
+
+- geen skiplinks
+
+## Content
+
 - Contrast in text
 - lees meer links
 - onclick op item
+- geen headers
+- afbeelding boven tekst
+- geen alt tekst
+
+## Footer
+
 - geen tekst in social links
--
+- placeholder als label
 
 # Afsluiter
 
