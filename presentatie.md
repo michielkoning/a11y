@@ -416,7 +416,9 @@ a {
 
 # Code
 
-## HTML
+## Semantiek
+
+- Elke pagina heeft één `main` element
 
 ## Aria-labeledby
 
@@ -519,9 +521,10 @@ img {
 }
 ```
 
-- tabs
-- kaarten
+## tabs
+
 - carousel
+- Accordeon
 - modal
 - menu
 - autocomplete
