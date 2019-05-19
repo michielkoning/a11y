@@ -20,10 +20,11 @@ button {
 }
 
 a {
-  color: inherit;
+  color: #b464a1;
   text-decoration-skip: auto;
 
   &:hover {
+    color: #2937aa;
     text-decoration: underline;
   }
 }

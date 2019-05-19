@@ -3,6 +3,9 @@
     <h2 id="menu-title" class="sr-only" tabindex="-1">{{ $t('mainNavigation') }}</h2>
     <ul>
       <li>
+        <router-link to="/cards">Cards</router-link>
+      </li>
+      <li>
         <router-link to="/modal">Modal</router-link>
       </li>
       <li>
@@ -47,8 +50,6 @@ ul {
 }
 
 a {
-  align-items: center;
-  display: flex;
-  position: relative;
+  color: currentColor;
 }
 </style>

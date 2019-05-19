@@ -139,7 +139,9 @@ Volg ons op <span lang="nl">Facebook</span>
 - De webpagina heeft een titel die het doel of het onderwerp beschrijft.
 - De paginatitel is uniek binnen de website.
 
-## Koppen SC 1.3.1 (A) en 2.4.6 (AA)
+## Koppen
+
+> SC 1.3.1 (A) en 2.4.6 (AA)
 
 - Koppen worden correct opgemaakt (`<h1>`, `<h2>` etc., `<caption>` of `<legend>`).
 - Koppen geven een goede beschrijving van de content.
@@ -387,6 +389,14 @@ a {
 ---
 
 - Het title attribuut is gebruikt als geen ruimte was voor een visueel tekstlabel.
+```html
+<label for="lastname" class="sr-only">Achternaam</label>
+<input type="text" name="lastname" id="lastname" />
+```
+```html
+<input type="text" name="lastname" id="lastname" aria-label="Achternaam />
+```
+
 - De `<fieldset>` en `<legend>` elementen zijn gebruikt voor het groeperen van bedieningselementen.
 
 ```html
@@ -396,6 +406,16 @@ a {
 ```
 
 - Gebruik `<fieldset>` en `<legend>` altijd voor een groep radiobuttons of checkboxen.
+```html
+<fieldset>
+  <legend class="sr-only">Geslacht</legend>
+  <labelb for="gender-m">Man</label>
+  <inputa type="radio" name="gender" id="gender-m" />
+  <labela for="gender-f">Vrouw</label>
+  <input type="radio" name="gender" id="gender-f" />
+</fieldset>
+```
+
 - Bied goed beschrijvende labels en plaats belangrijke instructie binnen het geassocieerde label.
 
 ## Fout identificatie, foutsuggestie en preventie
