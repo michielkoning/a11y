@@ -558,6 +558,7 @@ img {
 - geen headers
 - afbeelding boven tekst
 - geen alt tekst
+- te lange zinnen
 
 ## Footer
 
@@ -568,3 +569,5 @@ img {
 
 - benader mij voor vragen
 - goed gevoel bij?
+
+https://accessibilityinsights.io/docs/en/web/overview
