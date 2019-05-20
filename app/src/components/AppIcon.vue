@@ -1,8 +1,12 @@
 <template>
   <svg :aria-label="title" :width="width" :height="height" role="presentation">
     <title v-if="title" lang="nl">{{ title }}</title>
-    <g :fill="color">
-      <use v-bind="{ 'xlink:href': '#' + icon }" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+    <g :fill="color" tabindex="-1">
+      <use
+        tabindex="-1"
+        v-bind="{ 'xlink:href': '#' + icon }"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      ></use>
     </g>
   </svg>
 </template>

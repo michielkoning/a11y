@@ -1,6 +1,10 @@
 <template>
   <app-page title="Autocomplete">
-    <autocomplete />
+    <autocomplete id="countries" v-model="search" name="Zoek naar landen" :list="countries" />
+    <a
+      href="https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.0pattern/combobox-autocomplete-list.html"
+      >guidelines</a
+    >
   </app-page>
 </template>
 
@@ -16,7 +20,21 @@ export default {
   data() {
     return {
       showModal: false,
+      countries: [],
+      search: '',
     };
+  },
+  mounted() {
+    this.getCountries();
+  },
+  methods: {
+    getCountries() {
+      fetch('/data/countries.json')
+        .then(response => response.json())
+        .then(data => {
+          this.countries = data.map(item => item.name);
+        });
+    },
   },
 };
 </script>

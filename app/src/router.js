@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
 import Modal from './views/Modal.vue';
 import Cards from './views/Cards.vue';
 
@@ -16,16 +15,18 @@ export default new Router({
   },
   routes: [
     {
-      path: '/',
-      component: Home,
-    },
-    {
       path: '/cards',
       component: Cards,
+      meta: {
+        step: 0,
+      },
     },
     {
       path: '/modal',
       component: Modal,
+      meta: {
+        step: 1,
+      },
     },
     {
       path: '/autocomplete',

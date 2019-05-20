@@ -39,9 +39,6 @@ export default {
   methods: {
     toggleModal() {
       this.showModal = !this.showModal;
-      if (!this.showModal) {
-        this.$refs.button.focus();
-      }
     },
   },
 };

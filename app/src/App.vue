@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <app-header />
+    <main-navigation />
 
     <div class="page">
       <router-view />
@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import AppHeader from '@/components/AppHeader.vue';
+import MainNavigation from '@/components/MainNavigation.vue';
 
 export default {
   components: {
-    AppHeader,
+    MainNavigation,
   },
 };
 </script>

@@ -22,6 +22,7 @@ button {
 a {
   color: #b464a1;
   text-decoration-skip: auto;
+  text-decoration: underline;
 
   &:hover {
     color: #2937aa;

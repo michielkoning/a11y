@@ -1,7 +1,7 @@
 <template>
   <main>
     <h1 id="content" tabindex="-1">{{ title }}</h1>
-    <slot/>
+    <slot />
   </main>
 </template>
 
@@ -19,10 +19,8 @@ export default {
 <style lang="postcss" scoped>
 main {
   min-height: 100vh;
-  padding: 2em;
+  padding: var(--gutter);
 
-  @media (--navigation-position-left) {
-    margin-left: var(--width-navigation-left);
-  }
+  margin-left: var(--width-navigation-left);
 }
 </style>

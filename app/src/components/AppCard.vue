@@ -1,25 +1,30 @@
 <template>
-  <div class="item">
+  <div class="item" @click="goToPage">
     <h2>{{ content.title }}</h2>
     <div class="image-wrapper">
-      <img :src="content.image" :alt="content.alt">
+      <img :src="content.image" :alt="content.alt" />
     </div>
     <p>{{ content.text }}</p>
-    <a href="#" class="read-more">Lees meer over {{ content.title | lowercase }}</a>
+    <a ref="link" :href="content.url" class="read-more">
+      Lees meer over {{ content.link }} van
+      <span lang="en">Facebook</span>
+    </a>
   </div>
 </template>
 
 <script>
 export default {
-  filters: {
-    lowercase(value) {
-      return value.toLowerCase();
-    },
-  },
   props: {
     content: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    goToPage(event) {
+      if (event.target !== this.$refs.link) {
+        this.$router.push(this.content.url);
+      }
     },
   },
 };
@@ -29,6 +34,13 @@ export default {
 .item {
   display: flex;
   flex-direction: column;
+}
+
+.image-wrapper {
+  order: -1;
+}
+
+.item {
   background: var(--color-gray-lighter);
   padding: 0.5em;
   border-radius: 0.25em;
@@ -48,7 +60,6 @@ img {
 }
 
 .image-wrapper {
-  order: -1;
   border-radius: 0.25em 0.25em 0 0;
   margin: -0.5em -0.5em 0;
   overflow: hidden;

@@ -1,5 +1,6 @@
 <template>
   <div class="autocomplete">
+    <label :for="id">{{ name }}</label>
     <input
       :id="id"
       v-model="searchTerm"
@@ -11,19 +12,22 @@
       @keydown.up="onArrowUp"
       @keydown.enter.prevent="onEnter"
       @keydown.esc.prevent="reset"
-      @keydown.tab="reset"
+      @keydown.tab="close"
     />
     <icon icon="search" title="Zoeken" />
-    <ul v-show="isOpen" id="autocomplete-results">
+    <ul v-if="isOpen">
       <li
         v-for="(result, index) in results"
-        :key="result.slug"
+        :key="result.value"
+        tabindex="-1"
         :class="{ 'is-active': index === arrowCounter }"
         @click="selectResult(result)"
-      >
-        {{ result }}
-      </li>
+        v-html="result.title"
+      />
     </ul>
+    <div role="status" aria-live="assertive" aria-relevant="additions" class="sr-only">
+      {{ statusText }}
+    </div>
   </div>
 </template>
 
@@ -43,6 +47,10 @@ export default {
       type: String,
       required: true,
     },
+    name: {
+      type: String,
+      default: '',
+    },
     value: {
       type: String,
       default: '',
@@ -56,14 +64,20 @@ export default {
     };
   },
   computed: {
+    statusText() {
+      if (this.results.length) {
+        const resultsLabel =
+          this.results.length === 1
+            ? 'Er is 1 resultaat beschikbaar'
+            : `Er zijn ${this.results.length} resultaten beschikbaar.`;
+        return `${resultsLabel} Gebruik de pijltjestoetsen om te navigeren door de resultaten`;
+      } else if (this.searchTerm) {
+        return 'Er zijn geen resultaten beschikbaar.';
+      }
+      return '';
+    },
     isOpen() {
       return this.results.length > 0;
-    },
-  },
-
-  watch: {
-    searchTerm() {
-      this.$emit('change', this.searchTerm);
     },
   },
 
@@ -78,14 +92,23 @@ export default {
   methods: {
     onChange() {
       if (this.searchTerm.length > 0 && this.list.length > -1) {
-        this.results = this.list
-          .filter(accessory => {
+        const results = this.list
+          .filter(item => {
             const term = this.searchTerm.toLowerCase();
-            return accessory.toLowerCase().includes(term);
+            return item.toLowerCase().includes(term);
           })
           .slice(0, 10);
+
+        this.results = results.map(item => ({
+          value: item,
+          // make current searchterm bold with a regex
+          title: item.replace(
+            new RegExp(`(^|)(${this.searchTerm})(|$)`, 'ig'),
+            '$1<span class="highlight">$2</span>$3',
+          ),
+        }));
       } else {
-        this.reset();
+        this.close();
       }
     },
     onArrowDown() {
@@ -107,16 +130,21 @@ export default {
       if (result) this.selectResult(result);
     },
     selectResult(result) {
-      this.searchTerm = result;
-      this.reset();
+      this.searchTerm = result.value;
+      this.close();
+      this.$emit('input', this.searchTerm);
     },
     reset() {
+      this.searchTerm = '';
+      this.close();
+    },
+    close() {
       this.results = [];
       this.arrowCounter = -1;
     },
     handleClickOutside(evt) {
       if (!this.$el.contains(evt.target)) {
-        this.reset();
+        this.close();
       }
     },
   },
@@ -173,5 +201,9 @@ li {
     background-color: var(--color-primary);
     color: var(--color-white);
   }
+}
+
+>>> .highlight {
+  font-weight: var(--font-weight-bold);
 }
 </style>

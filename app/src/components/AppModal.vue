@@ -3,23 +3,22 @@
     <div
       ref="modal"
       v-focus
-      :aria-label="title"
-      data-qa="modal"
+      aria-labelledby="modal-title"
       role="dialog"
       class="modal"
-      @click="closeByBackgroundClick"
       tabindex="-1"
+      @click="closeByBackgroundClick"
       @keydown.esc="close"
     >
-      <article ref="wrapper" class="wrapper" role="document">
+      <article ref="wrapper" class="wrapper" tabindex="-1" role="document">
         <header>
-          <h2 id="modal" class="title" data-qa="modal-title">{{ title }}</h2>
+          <h2 id="modal-title" class="title">{{ title }}</h2>
           <button type="button" class="close" @click="close">
-            <Icon icon="close" title="Sluiten"/>
+            <Icon icon="close" />
           </button>
         </header>
         <div class="content" data-qa="modal-content">
-          <slot/>
+          <slot />
         </div>
       </article>
     </div>
@@ -37,7 +36,6 @@ export default {
   directives: {
     focus: {
       inserted(el) {
-        console.log(el);
         el.focus();
       },
     },
@@ -51,7 +49,14 @@ export default {
   data() {
     return {
       nodes: null,
+      activeElement: null,
     };
+  },
+  beforeMount() {
+    this.activeElement = document.activeElement;
+  },
+  destroyed() {
+    this.activeElement.focus();
   },
   mounted() {
     document.body.style.overflow = 'hidden';
