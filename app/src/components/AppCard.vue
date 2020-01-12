@@ -1,15 +1,15 @@
 <template>
-  <div class="item" @click="goToPage">
-    <h2>{{ content.title }}</h2>
+  <li class="item" @mousedown="mouseDown" @mouseup="mouseUp">
+    <h2>
+      <a :href="url">{{ content.title }}</a>
+    </h2>
     <div class="image-wrapper">
       <img :src="content.image" :alt="content.alt" />
     </div>
     <p>{{ content.text }}</p>
-    <a ref="link" :href="content.url" class="read-more">
-      Lees meer over {{ content.link }} van
-      <span lang="en">Facebook</span>
-    </a>
-  </div>
+
+    <span class="cta" aria-hidden="true">Lees meer</span>
+  </li>
 </template>
 
 <script>
@@ -20,11 +20,24 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      url: '/modal',
+      down: null,
+    };
+  },
   methods: {
-    goToPage(event) {
-      if (event.target !== this.$refs.link) {
-        this.$router.push(this.content.url);
+    mouseUp() {
+      const up = +new Date();
+      if (up - this.down < 200) {
+        this.goToItem();
       }
+    },
+    mouseDown() {
+      this.down = +new Date();
+    },
+    goToItem() {
+      this.$router.push(this.url);
     },
   },
 };
@@ -34,6 +47,17 @@ export default {
 .item {
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  &:focus-within,
+  &:hover {
+    box-shadow: 0 0 0 2px;
+    outline: 2px solid transparent;
+
+    a:focus {
+      text-decoration: none;
+    }
+  }
 }
 
 .image-wrapper {
@@ -44,12 +68,16 @@ export default {
   background: var(--color-gray-lighter);
   padding: 0.5em;
   border-radius: 0.25em;
+  cursor: pointer;
 }
 
-a {
+a:focus {
+  outline: none;
+  text-decoration: underline;
+}
+
+.cta {
   margin-top: auto;
-  display: block;
-  height: 3em;
 }
 
 img {

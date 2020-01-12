@@ -19,6 +19,14 @@ button {
   }
 }
 
+.cta {
+  display: block;
+  border: 2px solid black;
+  text-align: center;
+  padding: 0.25em;
+  border-radius: 0.25em;
+}
+
 a {
   color: #b464a1;
   text-decoration-skip: auto;

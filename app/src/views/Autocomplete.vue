@@ -1,10 +1,10 @@
 <template>
   <app-page title="Autocomplete">
-    <autocomplete id="countries" v-model="search" name="Zoek naar landen" :list="countries" />
+    <autocomplete id="countries" v-model="search" name="Zoek naar landen" :list="countries"/>
+    {{ search }}
     <a
       href="https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.0pattern/combobox-autocomplete-list.html"
-      >guidelines</a
-    >
+    >guidelines</a>
   </app-page>
 </template>
 

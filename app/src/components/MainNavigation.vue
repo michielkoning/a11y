@@ -17,10 +17,10 @@
           <router-link to="/">Caroussel</router-link>
         </li>
         <li>
-          <router-link to="/">Tabs</router-link>
+          <router-link to="/tabs">Tabs</router-link>
         </li>
         <li>
-          <router-link to="/">Accordeon</router-link>
+          <router-link to="/accordeon">Accordeon</router-link>
         </li>
         <li>
           <router-link to="/">Error handler</router-link>
